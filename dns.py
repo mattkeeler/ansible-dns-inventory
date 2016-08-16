@@ -2,7 +2,7 @@
 
 ###############################################################################
 # Dynamic DNS inventory script for Ansible
-#
+# Matt Keeler (http://keeler.org)
 # Based upon Remie Bolte's Node.js script to the same purpose
 # (https://medium.com/@remie/using-dns-as-an-ansible-dynamic-inventory-e65a2ed6bc9#.wjoahpbd0)
 #
