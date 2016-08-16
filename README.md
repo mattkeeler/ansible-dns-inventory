@@ -5,7 +5,7 @@ This Python script generates a dynamic inventory from specially formatted DNS TX
 
 It works by querying the specified domain for any TXT records matching two types of strings. The first specifies a hostname and any groups that host belongs to, using the following format:
 
-     "hostname=tomcat.example.com;groups=tomcat,webserver,texas"
+     "hostname=tomcat01.example.com;groups=tomcat,webserver,texas"
 
 Hosts without any specified groups will be added to the "ungrouped" group
 
@@ -13,11 +13,56 @@ The second string specifies any group_vars for a given group:
 
     "group=webserver;vars=foo_var:foo,bar_var:bar"
 
-
 You can optionally specify host_vars on a hostname line, like so:
 
      "hostname=mysql.example.com;hostvars=foo_var:foo,bar_var:bar"
-     "hostname=lab7.example.com;groups=lab;hostvars=foo_var:foo"
+     "hostname=lab3.example.com;groups=lab;hostvars=foo_var:foo"
+     
+Output might look something like this:
+
+```json
+{
+    "_meta": {
+        "hostvars": {
+            "mysql.example.com": {
+                "foo_var": "foo",
+                "bar_var": "bar"
+            }
+            "lab7.example.com": {
+                "foo_var": "foo",
+            }
+        }
+    },
+    "tomcat": {
+        "hosts": [
+            "tomcat01.example.com",
+            "tomcat02.ptsteams.lab"
+        ]
+    },
+    "lab": {
+        "hosts": [
+            "lab1.example.com"
+            "lab2.example.com"
+            "lab3.example.com"
+        ],
+        "vars": {
+            "ansible_port": "22",
+            "ansible_user": "matt"
+        }
+    },
+    "ungrouped": {
+        "hosts": [
+            "mysql.example.com"
+        ]
+    },
+    "webservers": {
+        "hosts": [
+            "webserver1.example.com"
+            "webserver2.example.com"
+        ]
+    }
+}
+```
 
 
 ## Some things to keep in mind:
