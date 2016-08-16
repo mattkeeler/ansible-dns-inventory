@@ -5,7 +5,7 @@ This Python script generates a dynamic inventory from specially formatted DNS TX
 
 It works by querying the specified domain for any TXT records matching two types of strings. The first specifies a hostname and any groups that host belongs to, using the following format:
 
-     "hostname=tomcat01.example.com;groups=tomcat,webserver,texas"
+     "hostname=tomcat01.example.com;groups=tomcat,webserver"
 
 Hosts without any specified groups will be added to the "ungrouped" group
 
@@ -36,7 +36,7 @@ Output might look something like this:
     "tomcat": {
         "hosts": [
             "tomcat01.example.com",
-            "tomcat02.ptsteams.lab"
+            "tomcat02.example.com"
         ]
     },
     "lab": {
