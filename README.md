@@ -7,15 +7,18 @@ It works by querying the specified domain for any TXT records matching two types
 
      "hostname=tomcat.example.com;groups=tomcat,webserver,texas"
 
-The second specifies any group_vars for a given group:
+Hosts without any specified groups will be added to the "ungrouped" group
+
+The second string specifies any group_vars for a given group:
 
     "group=webserver;vars=foo_var:foo,bar_var:bar"
 
 
-You can optionally specify host_vars on a hostname line:
+You can optionally specify host_vars on a hostname line, like so:
 
      "hostname=mysql.example.com;hostvars=foo_var:foo,bar_var:bar"
      "hostname=lab7.example.com;groups=lab;hostvars=foo_var:foo"
+
 
 ## Some things to keep in mind:
 1. In an inventory, host_vars take precedence over group_vars.
