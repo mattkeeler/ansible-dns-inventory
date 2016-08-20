@@ -45,7 +45,7 @@ from collections import defaultdict
 import json
 
 # The domain we are querying.
-domain = 'ptsteams.lab'
+domain = 'example.com'
 # We sort results in reverse alphabetical order to make parsing easier.
 records = sorted(dns.resolver.query(domain, 'TXT'), reverse=True)
 
