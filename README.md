@@ -1,7 +1,7 @@
 # Ansible DNS dynamic inventory script
 ## Overview
 
-This Python script, based upon [Remie Bolte's script Node.js script to the same purpose](https://medium.com/@remie/using-dns-as-an-ansible-dynamic-inventory-e65a2ed6bc9#.wjoahpbd0), generates a dynamic inventory from specially formatted DNS TXT records. Output is in JSON.
+This Python script, based upon [Remie Bolte's Node.js script to the same purpose](https://medium.com/@remie/using-dns-as-an-ansible-dynamic-inventory-e65a2ed6bc9#.wjoahpbd0), generates a dynamic inventory from specially formatted DNS TXT records. Output is in JSON.
 
 It works by querying the specified domain for any TXT records matching two types of strings. The first specifies a hostname and any groups that host belongs to, using the following format:
 
