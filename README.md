@@ -1,11 +1,11 @@
 # Ansible DNS dynamic inventory script
 ## Overview
 
-This Python script generates a dynamic inventory from specially formatted DNS TXT records. Output is in JSON.
+This Python script, based upon [Remie Bolte's script Node.js script to the same purpose](https://medium.com/@remie/using-dns-as-an-ansible-dynamic-inventory-e65a2ed6bc9#.wjoahpbd0) generates a dynamic inventory from specially formatted DNS TXT records. Output is in JSON.
 
 It works by querying the specified domain for any TXT records matching two types of strings. The first specifies a hostname and any groups that host belongs to, using the following format:
 
-     "hostname=tomcat01.example.com;groups=tomcat,webserver"
+     "hostname=tomcat01.example.com;groups=tomcat,webserver,texas"
 
 Hosts without any specified groups will be added to the "ungrouped" group
 
@@ -17,7 +17,7 @@ You can optionally specify host_vars on a hostname line, like so:
 
      "hostname=mysql.example.com;hostvars=foo_var:foo,bar_var:bar"
      "hostname=lab3.example.com;groups=lab;hostvars=foo_var:foo"
-     
+
 Output might look something like this:
 
 ```json
@@ -28,15 +28,12 @@ Output might look something like this:
                 "foo_var": "foo",
                 "bar_var": "bar"
             }
-            "lab7.example.com": {
-                "foo_var": "foo",
-            }
         }
     },
     "tomcat": {
         "hosts": [
             "tomcat01.example.com",
-            "tomcat02.example.com"
+            "tomcat02.ptsteams.lab"
         ]
     },
     "lab": {
@@ -69,16 +66,17 @@ Output might look something like this:
 1. In an inventory, host_vars take precedence over group_vars.
 2. Strings in TXT records are limited to 255 characters, but an individual
   record can be composed of multiple strings separated by double quotation
-  marks. Multiple strings are treated as if they are concatenated together.
-  (See [RFC 4408](https://www.ietf.org/rfc/rfc4408.txt) and [RFC 1035](https://www.ietf.org/rfc/rfc1035.txt) for technical details.) So a TXT record like
+  marks. Per [RFC 4408](https://www.ietf.org/rfc/rfc4408.txt) and [RFC 1035](https://www.ietf.org/rfc/rfc1035.txt),
+  this script treats multiple strings as if they are concatenated together.
+  So a TXT record like
 
    ```
      "group=db;vars=ansible_port:22" ",bar_var:bar"
-   ```     
+   ```
 
    will be read as
 
-   ```  
+   ```
    group=db;vars=ansible_port:22,bar_var:bar
    ```
 
