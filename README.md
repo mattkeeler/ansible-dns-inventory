@@ -65,10 +65,11 @@ Output might look something like this:
 ## Some things to keep in mind:
 1. In an inventory, host_vars take precedence over group_vars.
 2. Strings in TXT records are limited to 255 characters, but an individual
-  record can be composed of multiple strings separated by double quotation
-  marks. Per [RFC 4408](https://www.ietf.org/rfc/rfc4408.txt) and [RFC 1035](https://www.ietf.org/rfc/rfc1035.txt),
-  this script treats multiple strings as if they are concatenated together.
-  So a TXT record like
+   record can be composed of multiple strings enclosed in double quotation 
+   marks and separated by a space. Per [RFC 4408](https://www.ietf.org/rfc/rfc4408.txt)
+   and [RFC 1035](https://www.ietf.org/rfc/rfc1035.txt), this script treats 
+   multiple strings as if they are concatenated together. So a TXT record 
+   like
 
    ```
      "group=db;vars=ansible_port:22" ",bar_var:bar"
